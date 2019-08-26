@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% block title %} Profile {% endblock %}
+{% block content %}
+
+<div id="main-wrap">
+    <div id="inner-wrap">
+        <div id="sitewide-notice" class="admin-bar-on"></div>
+        <div id="page" class="hfeed site">
+            <div id="main" class="wrapper">
+
+                <div class="page-full-width network-profile my-profile">
+
+                    <div id="primary" class="site-content">
+                        <div id="content" role="main">
+                            <article style="padding:0px;">
+                                <div class="entry-buddypress-content">
+                                    <div id="buddypress">
+                                        <div id="item-header" role="complementary">
+                                            <div class="bb-cover-photo" data-obj="user" data-objid="1060"
+                                                data-nonce="e775ca81e1">
+                                                <button class="update-cover-photo"
+                                                    onclick="window.location.href = '{% url 'home' %}'"><i
+                                                        class="fa fa-camera"></i>
+                                                    <div>Update Cover Photo<i class="fa fa-spinner fa-spin"
+                                                            style="display:none"></i></div>
+                                                </button>
+                                                <div class="progress"><span></span></div>        
+                                                <button class="update-cover-photo refresh-cover-photo" data-routine="remove"
+                                                    title="Get a random Cover Image" id="refresh-cover-photo-btn"><i
+                                                        class="fas fa-sync"
+                                                        onclick="window.location.href='{% url "home" %}'"></i>
+                                                    <div>Get a Random Cover Image<i class="fa fa-spinner fa-spin"
+                                                            style="display:none"></i></div>
+                                                </button>
+        
+                                                <div class="holder" id="header-cover-image"
+                                                    style="background-image:url(/media/{{ profile.coverImage }})">
+                                                </div>
+                                                {% if messages %}
+                                                <!-- {% for i in messages %} -->
+                                                <!-- <div id="growls" class="default" style="color:red;" role="alert">{{ i }}</div> -->
+                                                {% for i in messages %}
+                                                <div id="growls" class="default">
+                                                    <div class="growl growl-notice growl-medium">
+                                                        <div class="growl-close" onclick="submit();">×</div>
+                                                        <div class="growl-title"></div>
+                                                        <div class="growl-message">{{i }}</div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                <!-- {% endfor %} -->
+                                                {% endif %}
+                                            </div>
+                                            <script>
+                                                jQuery('document').ready(function () {
+                                                    option = {
+                                                        nonce: 'e775ca81e1'
+                                                    };
+                                                    buddyboss_cover_photo(option);
+                                                });
+                                            </script>
+                                            <div id="item-header-cover" class="table">
+                                                <div class="table-cell">
+                                                    <div class="table cover-content">
+                                                        <div class="table-cell">
+                                                            <div id="item-header-avatar">
+                                                                <a href="">
+                                                                    <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                                                                        class="avatar user-1060-avatar avatar-150 photo"
+                                                                        width="150" height="150"
+                                                                        alt="Profile picture of {{ request.user.username }}" />
+                                                                </a>
+                                                            </div>
+                                                            <div id="item-header-content">
+                                                                <div class="basic">
+                                                                    <h1>{{ request.user.first_name }}
+                                                                        {{ request.user.last_name }}</h1><span class="sep">,
+                                                                    </span>
+                                                                    <h2 class="user-nicename">@{{ request.user.username }}
+                                                                    </h2>
+                                                                </div>
+        
+                                                                <div class="btn-group social">
+                                                                </div>
+                                                                <div class="row" id="mycred-users-badges">
+                                                                    <div class="col-xs-12"></div>
+                                                                </div>
+                                                                <div id="mycred-my-ranks">
+                                                                    <div class="mycred-my-rank crediti">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="table-cell">
+                                                            <div id="item-statistics">
+                                                                <div class="numbers">
+                                                                    <span>
+                                                                        <p>{{ following }}</p>
+                                                                        <p>Following</p>
+                                                                    </span>
+                                                                    <span>
+                                                                        <p>{{ followers }}</p>
+                                                                        <p>Followers</p>
+                                                                    </span>
+                                                                </div>
+                                                                <div id="item-buttons" class="profile">
+                                                                    <div id="main-button" class="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="full-width">
+                                            <div id="item-main-content">
+                                                <div id="item-nav">
+                                                    <div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
+                                                        <ul id="nav-bar-filter">
+                                                            <li id="blog-personal-li" ><a id="user-blog"
+                                                                    href="{% url 'home' %}">LibriCK
+                                                                    <span class=“count”>{{posts}}</span></a>
+                                                            </li>
+                                                            <li id="activity-personal-li"><a id="user-activity"
+                                                                    href="https://edizioniopen.it/membri/hearlesse/activity/">Activities</a>
+                                                            </li>
+                                                            <li id="notifications-personal-li"><a id="user-notifications"
+                                                                    href="https://edizioniopen.it/membri/hearlesse/notifications/">Notifications
+                                                                    <span class="no-count">0</span></a>
+                                                            </li>
+                                                            <li id="messages-personal-li"><a id="user-messages"
+                                                                    href="https://edizioniopen.it/membri/hearlesse/messages/">Messages
+                                                                    <span class="no-count">{{messages}}</span></a>
+                                                            </li>
+                                                            <li id="xprofile-personal-li" class="current selected"><a id="user-xprofile"
+                                                                    href="{% url 'home' %}">Profile</a>
+                                                            </li>
+                                                            <li id="settings-personal-li"><a id="user-settings"
+                                                                    href="https://edizioniopen.it/membri/hearlesse/settings/">Settings</a>
+                                                            </li>
+                                                            <li id="members-following-personal-li"><a
+                                                                    id="user-members-following"
+                                                                    href="https://edizioniopen.it/membri/hearlesse/following/">Following
+                                                                    <span>{{ following }}</span></a></li>
+                                                            <li id="members-followers-personal-li"><a
+                                                                    id="user-members-followers"
+                                                                    href="https://edizioniopen.it/membri/hearlesse/followers/">Followers
+                                                                    <span>{{ followers }}</span></a></li>
+                                                            <li id="mycred-history-personal-li"><a id="user-mycred-history"
+                                                                    href="https://edizioniopen.it/membri/hearlesse/mycred-history/">Points</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div id="item-body" role="main" class="clearfix">
+                                                        <div class="item-list-tabs no-ajax" id="subnav"
+                                                        aria-label="Member secondary navigation" role="navigation">
+                                                        <ul>
+                                                            <li id="public-personal-li" class="current selected" ><a
+                                                                    id="public"
+                                                                    href="{% url 'home' %}">View</a>
+                                                            </li>
+                                                            <li id="edit-personal-li"><a id="edit"
+                                                                    href="{% url 'home' %}">Edit</a>
+                                                            </li>
+                                                            <li id="change-avatar-personal-li" ><a id="change-avatar"
+                                                                    href="{% url 'home' %}">Edit
+                                                                    the profile photo</a></li>
+                                                            <li id="change-cover-image-personal-li"  ><a
+                                                                    id="change-cover-image"
+                                                                    href="{% url 'home' %}">Change
+                                                                    cover image</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="profile">
+                                                        <div class="bp-widget mycred">
+                                                            <h4>Points</h4>
+                                                            <table class="profile-fields">
+                                                                <tbody>
+                                                                    <tr
+                                                                        class="field_1 field_current_balance_mycred_default">
+                                                                        <td class="label">Current balance</td>
+                                                                        <td class="data">0</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="bp-widget mycred">
+                                                            <h4>Credits</h4>
+                                                            <table class="profile-fields">
+                                                                <tbody>
+                                                                    <tr class="field_1 field_current_balance_crediti">
+                                                                        <td class="label">Current balance</td>
+                                                                        <td class="data">0</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="bp-widget mycred-field">
+                                                            <table class="profile-fields">
+                                                                <tbody>
+                                                                    <tr id="mycred-users-rank">
+                                                                        <td class="label">Rank</td>
+                                                                        <td class="data">
+                                                                            <div class="mycred-my-rank crediti"></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="entry-meta">
+                                </footer>
+                            </article>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,7 @@
+<a href="/account/facebook/login">Login with facebook</a>
+<br>
+            <form name="loginform" id="loginform" method="POST">{% csrf_token %}
+                {{form.as_p}}
+                <br>
+                <input type="submit" value="Submit!">
+            </form>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+    <html>
+        <title>
+            Facebook Login
+        </title>
+        <body>
+            {% if request.user.is_authenticated %}
+            Logged in : {{request.user}}
+            <br> 
+            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+            <br>
+            <form action="{% url 'logout' %}">
+                <input type="submit" value="Log Out!">
+            </form>
+            {% endif %}
+            <br>
+            <form action="{% url 'signup' %}">
+                <input type="submit" value="Sign Up!">
+            </form>
+            <br>
+            <form action="{% url 'login' %}">
+                <input type="submit" value="Log In!">
+            </form>
+            <br>
+        </body>
+    </html>
